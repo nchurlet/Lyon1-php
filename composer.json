@@ -2,7 +2,8 @@
     "require": {
         "silex/silex": "~2.0",
         "twig/twig": "^1.24",
-        "symfony/twig-bridge": "^3.1"
+        "symfony/twig-bridge": "^3.1",
+         "doctrine/dbal": "^2.5"
     },
     "scripts": {
       "run": [
@@ -12,7 +13,9 @@
     },
     "autoload": {
        "psr-4": {
-         "App\\Users\\Controller\\": "src/Users/Controller/"
+         "App\\Users\\Controller\\": "src/Users/Controller/",
+         "App\\Users\\Repository\\": "src/Users/Repository/",
+         "App\\Users\\Entity\\": "src/Users/Entity/"
        }
    }
 }
