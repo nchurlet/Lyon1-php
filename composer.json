@@ -9,5 +9,8 @@
         "echo 'Started web server on http://localhost:8000'",
         "php -S 0.0.0.0:8000 -t web web/index.php"
       ]
-    }
+    },
+    "autoload": {
+       "psr-4": {"App\\": "../src/"}
+   }
 }
