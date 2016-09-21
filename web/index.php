@@ -1,8 +1,6 @@
 <?php
 // web/index.php
 $loader = require_once __DIR__.'/../vendor/autoload.php';
-// $loader->add('Users', __DIR__.'/../src/Users');
-var_dump($loader);
 require __DIR__.'/../src/app.php';
 require __DIR__.'/../src/routes.php';
 require __DIR__.'/../config/dev.php';

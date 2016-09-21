@@ -1,3 +1,3 @@
 <?php
 
-$app->get('/hello', 'Users\Controller\IndexController::indexAction')->bind('hello');
+$app->get('/hello', 'App\Users\Controller\IndexController::indexAction')->bind('hello');
