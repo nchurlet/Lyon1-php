@@ -22,46 +22,6 @@ class UserRepository
     {
         $this->db = $db;
     }
-    /**
-     * Saves the user to the database.
-     *
-     * @param \App\Users\Entity\User $user
-     */
-    public function save($user)
-    {
-        $userData = array(
-            'username' => $user->getUsername(),
-            'mail' => $user->getMail(),
-            'role' => $user->getRole(),
-        );
-        // If the password was changed, re-encrypt it.
-        if (strlen($user->getPassword()) != 88) {
-            $userData['salt'] = uniqid(mt_rand());
-            $userData['password'] = $this->encoder->encodePassword($user->getPassword(), $userData['salt']);
-        }
-        if ($user->getId()) {
-            // If a new image was uploaded, make sure the filename gets set.
-            $newFile = $this->handleFileUpload($user);
-            if ($newFile) {
-                $userData['image'] = $user->getImage();
-            }
-            $this->db->update('users', $userData, array('user_id' => $user->getId()));
-        } else {
-            // The user is new, note the creation timestamp.
-            $userData['created_at'] = time();
-            $this->db->insert('users', $userData);
-            // Get the id of the newly created user and set it on the entity.
-            $id = $this->db->lastInsertId();
-            $user->setId($id);
-            // If a new image was uploaded, update the user with the new
-            // filename.
-            $newFile = $this->handleFileUpload($user);
-            if ($newFile) {
-                $newData = array('image' => $user->getImage());
-                $this->db->update('users', $newData, array('user_id' => $id));
-            }
-        }
-    }
 
    /**
     * Returns a collection of users.
@@ -77,6 +37,8 @@ class UserRepository
     */
    public function getAll()
    {
+       //  $userEntityList = array();
+
        $queryBuilder = $this->db->createQueryBuilder();
        $queryBuilder
            ->select('u.*')
@@ -84,7 +46,20 @@ class UserRepository
 
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
+       foreach ($usersData as $userData) {
+           $userEntityList[$userData['id']] = $this->buildUser($userData);
+       }
 
-       return $usersData;
+       return $userEntityList;
    }
+
+    protected function buildUser($userData)
+    {
+        $user = new User();
+        $user->setId($userData['id']);
+        $user->setNom($userData['nom']);
+        $user->setPrenom($userData['prenom']);
+
+        return $user;
+    }
 }

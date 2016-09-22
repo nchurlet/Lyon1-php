@@ -1,3 +1,3 @@
 <?php
 
-$app->get('/hello', 'App\Users\Controller\IndexController::indexAction')->bind('hello');
+$app->get('/users/list', 'App\Users\Controller\IndexController::listAction')->bind('usersList');
