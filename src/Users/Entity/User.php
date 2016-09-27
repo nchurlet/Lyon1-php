@@ -23,6 +23,15 @@ class User
      */
     protected $prenom;
 
+/**
+ * Construct.
+ */
+public function __construct($id, $nom, $prenom)
+{
+    $this->id = $id;
+    $this->prenom = $prenom;
+    $this->nom = $nom;
+}
     /*
     * Setter di
     * @param Int $id

@@ -37,8 +37,6 @@ class UserRepository
     */
    public function getAll()
    {
-       //  $userEntityList = array();
-
        $queryBuilder = $this->db->createQueryBuilder();
        $queryBuilder
            ->select('u.*')
@@ -47,19 +45,20 @@ class UserRepository
        $statement = $queryBuilder->execute();
        $usersData = $statement->fetchAll();
        foreach ($usersData as $userData) {
-           $userEntityList[$userData['id']] = $this->buildUser($userData);
+           $userEntityList[$userData['id']] = new User($userData['id'], $userData['nom'], $userData['prenom']);
        }
 
        return $userEntityList;
    }
 
-    protected function buildUser($userData)
+    public function delete($id)
     {
-        $user = new User();
-        $user->setId($userData['id']);
-        $user->setNom($userData['nom']);
-        $user->setPrenom($userData['prenom']);
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+          ->delete('users')
+          ->where('id = ?')
+          ->setParameter(0, $id);
 
-        return $user;
+        $statement = $queryBuilder->execute();
     }
 }

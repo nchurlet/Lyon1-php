@@ -1,3 +1,5 @@
 <?php
 
-$app->get('/users/list', 'App\Users\Controller\IndexController::listAction')->bind('usersList');
+$app->get('/users/list', 'App\Users\Controller\IndexController::listAction')->bind('users.list');
+$app->get('/users/edit/{id}', 'App\Users\Controller\IndexController::editAction')->bind('users.edit');
+$app->post('/users/delete/{id}', 'App\Users\Controller\IndexController::deleteAction')->bind('users.delete');
