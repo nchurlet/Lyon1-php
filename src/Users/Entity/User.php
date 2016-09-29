@@ -4,55 +4,29 @@ namespace App\Users\Entity;
 
 class User
 {
-    /**
-     * User id.
-     *
-     * @var int
-     */
     protected $id;
-    /**
-     * nom.
-     *
-     * @var string
-     */
+
     protected $nom;
-    /**
-     * Prenom.
-     *
-     * @var string
-     */
+
     protected $prenom;
 
-/**
- * Construct.
- */
-public function __construct($id, $nom, $prenom)
-{
-    $this->id = $id;
-    $this->prenom = $prenom;
-    $this->nom = $nom;
-}
-    /*
-    * Setter di
-    * @param Int $id
-    */
+    public function __construct($id, $nom, $prenom)
+    {
+        $this->id = $id;
+        $this->prenom = $prenom;
+        $this->nom = $nom;
+    }
+
     public function setId($id)
     {
         $this->id = $id;
     }
 
-    /*
-    * Setter nom
-    * @param string $nom
-    */
     public function setNom($nom)
     {
         $this->nom = $nom;
     }
-    /*
-    * Setter prenom
-    * @param string $prenom
-    */
+
     public function setPrenom($prenom)
     {
         $this->prenom = $prenom;
