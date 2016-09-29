@@ -103,4 +103,20 @@ class UserRepository
 
         $statement = $queryBuilder->execute();
     }
+
+    public function insert($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+          ->insert('users')
+          ->values(
+              array(
+                'nom' => ':nom',
+                'prenom' => ':prenom',
+              )
+          )
+          ->setParameter(':nom', $parameters['nom'])
+          ->setParameter(':prenom', $parameters['prenom']);
+        $statement = $queryBuilder->execute();
+    }
 }

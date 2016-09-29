@@ -36,8 +36,14 @@ class IndexController
         if ($parameters['id']) {
             $user = $app['repository.user']->update($parameters);
         } else {
+            $user = $app['repository.user']->insert($parameters);
         }
 
         return $app->redirect($app['url_generator']->generate('users.list'));
+    }
+
+    public function newAction(Request $request, Application $app)
+    {
+        return $app['twig']->render('users.form.html.twig');
     }
 }
