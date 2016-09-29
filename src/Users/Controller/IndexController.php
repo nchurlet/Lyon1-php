@@ -21,4 +21,23 @@ class IndexController
 
         return $app->redirect($app['url_generator']->generate('users.list'));
     }
+
+    public function editAction(Request $request, Application $app)
+    {
+        $parameters = $request->attributes->all();
+        $user = $app['repository.user']->getById($parameters['id']);
+
+        return $app['twig']->render('users.form.html.twig', array('user' => $user));
+    }
+
+    public function saveAction(Request $request, Application $app)
+    {
+        $parameters = $request->request->all();
+        if ($parameters['id']) {
+            $user = $app['repository.user']->update($parameters);
+        } else {
+        }
+
+        return $app->redirect($app['url_generator']->generate('users.list'));
+    }
 }

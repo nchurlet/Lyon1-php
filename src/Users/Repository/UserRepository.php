@@ -14,10 +14,7 @@ class UserRepository
      * @var \Doctrine\DBAL\Connection
      */
     protected $db;
-    /**
-     * @var \Symfony\Component\Security\Core\Encoder\MessageDigestPasswordEncoder
-     */
-    protected $encoder;
+
     public function __construct(Connection $db)
     {
         $this->db = $db;
@@ -51,13 +48,58 @@ class UserRepository
        return $userEntityList;
    }
 
+   /**
+    * Returns an User object.
+    *
+    * @param $id
+    *   The id of the user to return.
+    *
+    * @return array A collection of users, keyed by user id.
+    */
+   public function getById($id)
+   {
+       $queryBuilder = $this->db->createQueryBuilder();
+       $queryBuilder
+           ->select('u.*')
+           ->from('users', 'u')
+           ->where('id = ?')
+           ->setParameter(0, $id);
+       $statement = $queryBuilder->execute();
+       $userData = $statement->fetchAll();
+
+       return new User($userData[0]['id'], $userData[0]['nom'], $userData[0]['prenom']);
+   }
+
     public function delete($id)
     {
         $queryBuilder = $this->db->createQueryBuilder();
         $queryBuilder
           ->delete('users')
-          ->where('id = ?')
-          ->setParameter(0, $id);
+          ->where('id = :id')
+          ->setParameter(':id', $id);
+
+        $statement = $queryBuilder->execute();
+    }
+
+    public function update($parameters)
+    {
+        $queryBuilder = $this->db->createQueryBuilder();
+        $queryBuilder
+          ->update('users')
+          ->where('id = :id')
+          ->setParameter(':id', $parameters['id']);
+
+        if ($parameters['nom']) {
+            $queryBuilder
+              ->set('nom', ':nom')
+              ->setParameter(':nom', $parameters['nom']);
+        }
+
+        if ($parameters['prenom']) {
+            $queryBuilder
+            ->set('prenom', ':prenom')
+            ->setParameter(':prenom', $parameters['prenom']);
+        }
 
         $statement = $queryBuilder->execute();
     }
