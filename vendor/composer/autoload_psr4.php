@@ -17,4 +17,7 @@ return array(
     'Psr\\Log\\' => array($vendorDir . '/psr/log/Psr/Log'),
     'Doctrine\\Common\\Cache\\' => array($vendorDir . '/doctrine/cache/lib/Doctrine/Common/Cache'),
     'Doctrine\\Common\\' => array($vendorDir . '/doctrine/common/lib/Doctrine/Common'),
+    'App\\Users\\Repository\\' => array($baseDir . '/src/Users/Repository'),
+    'App\\Users\\Entity\\' => array($baseDir . '/src/Users/Entity'),
+    'App\\Users\\Controller\\' => array($baseDir . '/src/Users/Controller'),
 );

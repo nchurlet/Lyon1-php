@@ -31,6 +31,12 @@ class ComposerStaticInit1bf5076188fa66d57d66df88ecc9fbf4
             'Doctrine\\Common\\Cache\\' => 22,
             'Doctrine\\Common\\' => 16,
         ),
+        'A' => 
+        array (
+            'App\\Users\\Repository\\' => 21,
+            'App\\Users\\Entity\\' => 17,
+            'App\\Users\\Controller\\' => 21,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
@@ -77,6 +83,18 @@ class ComposerStaticInit1bf5076188fa66d57d66df88ecc9fbf4
         'Doctrine\\Common\\' => 
         array (
             0 => __DIR__ . '/..' . '/doctrine/common/lib/Doctrine/Common',
+        ),
+        'App\\Users\\Repository\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Users/Repository',
+        ),
+        'App\\Users\\Entity\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Users/Entity',
+        ),
+        'App\\Users\\Controller\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src/Users/Controller',
         ),
     );
 
